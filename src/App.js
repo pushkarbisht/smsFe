@@ -6,7 +6,8 @@ import { PrimeReactProvider } from 'primereact/api';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import AuthWrapper from "./AuthWrapper.js";
-import axios from 'axios';
+
+import smsAxios from "./utils/smsAxios.js";
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState();
 
@@ -16,7 +17,7 @@ function App() {
                   let token = localStorage.getItem('token');
                   if(token){
                     try{
-                      let response = await axios.get("/api/auth/verify?token="+token);
+                      let response = await smsAxios.get("/api/auth/verify?token="+token);
                       setIsAuthenticated(true);
                     }
                     catch(err){
